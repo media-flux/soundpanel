@@ -22,7 +22,16 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       $(function () {
-        var socket = io("https://media-flux.github.io/soundpanel");
+        var socket = io({
+                          transports: [
+                            'websocket', 
+                            'flashsocket', 
+                            'htmlfile', 
+                            'xhr-polling', 
+                            'jsonp-polling', 
+                            'polling'
+                          ]
+                        });
         $('form').submit(function(){
           socket.emit('chat message', $('#m').val());
           $('#m').val('');
